@@ -3,15 +3,19 @@ export default function Home() {
     <main className="min-h-screen bg-[#f4f6f8]">
       {/* NAVBAR */}
       <nav className="bg-white border-b border-gray-200 px-8 h-14 flex items-center justify-between sticky top-0 z-10">
-        <div className="font-bold text-lg text-green-700">Math<span className="text-gray-800">KZ</span></div>
+        <a href="/" className="font-bold text-lg text-green-700">Math<span className="text-gray-800">KZ</span></a>
         <div className="flex gap-6 text-sm text-gray-600">
-          <a href="#" className="hover:text-green-600">Курстар</a>
+          <a href="/courses" className="hover:text-green-600">Курстар</a>
           <a href="#" className="hover:text-green-600">ҰБТ</a>
           <a href="#" className="hover:text-green-600">Олимпиада</a>
         </div>
         <div className="flex gap-3">
-          <button className="px-4 py-2 text-sm border border-green-600 text-green-600 rounded-md hover:bg-green-50">Кіру</button>
-          <button className="px-4 py-2 text-sm bg-green-600 text-white rounded-md hover:bg-green-700">Тіркелу</button>
+          <a href="/auth/login">
+            <button className="px-4 py-2 text-sm border border-green-600 text-green-600 rounded-md hover:bg-green-50">Кіру</button>
+          </a>
+          <a href="/auth/login">
+            <button className="px-4 py-2 text-sm bg-green-600 text-white rounded-md hover:bg-green-700">Тіркелу</button>
+          </a>
         </div>
       </nav>
 
@@ -37,8 +41,12 @@ export default function Home() {
               ))}
             </div>
             <div className="flex gap-3">
-              <button className="px-6 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700">Тегін бастау</button>
-              <button className="px-6 py-3 border border-green-600 text-green-600 rounded-md font-semibold hover:bg-green-50">Курстарды қарау</button>
+              <a href="/courses">
+                <button className="px-6 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700">Тегін бастау</button>
+              </a>
+              <a href="/courses">
+                <button className="px-6 py-3 border border-green-600 text-green-600 rounded-md font-semibold hover:bg-green-50">Курстарды қарау</button>
+              </a>
             </div>
           </div>
 
@@ -55,8 +63,10 @@ export default function Home() {
               <div className="font-bold text-sm mb-2">Математика: Алгебра және анализ</div>
               <div className="text-xs text-gray-400 mb-3">📹 24 сабақ · ⏱ 18 сағат</div>
               <div className="flex items-center justify-between">
-                <span className="font-bold">12 900 ₸</span>
-                <button className="px-3 py-1.5 bg-green-600 text-white text-xs rounded-md">Қосылу</button>
+                <span className="font-bold">12 000 ₸</span>
+                <a href="/auth/login">
+                  <button className="px-3 py-1.5 bg-green-600 text-white text-xs rounded-md">Қосылу</button>
+                </a>
               </div>
             </div>
           </div>
@@ -69,9 +79,9 @@ export default function Home() {
         <p className="text-sm text-gray-400 mb-6">Деңгейіңізге сай курс таңдаңыз</p>
         <div className="grid grid-cols-3 gap-5">
           {[
-            { title: "Математика толық курс", tag: "ҰБТ дайындық", lessons: 24, price: "12 900 ₸", bg: "from-blue-900 to-blue-700" },
-            { title: "Диофант теңдеулері", tag: "Олимпиада", lessons: 16, price: "Тегін", bg: "from-green-900 to-green-700" },
-            { title: "Бүтін сандар теориясы", tag: "Санар теориясы", lessons: 12, price: "7 900 ₸", bg: "from-purple-900 to-purple-700" },
+            { title: "Математика толық курс", tag: "ҰБТ дайындық", lessons: 24, price: "12 900 ₸", free: false, bg: "from-blue-900 to-blue-700" },
+            { title: "Диофант теңдеулері", tag: "Олимпиада", lessons: 16, price: "Тегін", free: true, bg: "from-green-900 to-green-700" },
+            { title: "Бүтін сандар теориясы", tag: "Санар теориясы", lessons: 12, price: "7 900 ₸", free: false, bg: "from-purple-900 to-purple-700" },
           ].map((c) => (
             <div key={c.title} className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
               <div className={`h-32 bg-gradient-to-br ${c.bg} flex items-center justify-center`}>
@@ -82,13 +92,20 @@ export default function Home() {
                 <div className="font-bold text-sm mb-2">{c.title}</div>
                 <div className="text-xs text-gray-400 mb-3">📹 {c.lessons} сабақ</div>
                 <div className="flex items-center justify-between">
-                  <span className={`font-bold ${c.price === "Тегін" ? "text-green-600 text-sm" : ""}`}>{c.price}</span>
-                  <button className="px-3 py-1.5 bg-green-600 text-white text-xs rounded-md hover:bg-green-700">Қосылу</button>
+                  <span className={`font-bold ${c.free ? "text-green-600 text-sm" : ""}`}>{c.price}</span>
+                  <a href="/auth/login">
+                    <button className="px-3 py-1.5 bg-green-600 text-white text-xs rounded-md hover:bg-green-700">{c.free ? "Бастау" : "Қосылу"}</button>
+                  </a>
                 </div>
               </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* FOOTER */}
+      <div className="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-400">
+        <strong className="text-green-700">MathKZ</strong> — Қазақ тілінде математика білімі · 2025
       </div>
     </main>
   )
